@@ -1,0 +1,32 @@
+@page "/TablaMultiplicar"
+@rendermode InteractiveServer
+
+<PageTitle>Tabla de Multiplicar</PageTitle>
+
+<h1>Tabla de Multiplicar</h1>
+
+<p>Escribe el numero que quieres saber sus multiplos</p>
+
+<div class="mt-2">
+   
+    <label>Numero</label>
+    <input type="number" @bind="numero" class="form-control" @bind:event="oninput" />
+
+</div>
+
+@if (numero >0){
+
+    for(int i=0; i<=15 ; i++){
+        <div class="md-1"> @numero X @i  = <strong>@(i*numero)</strong> </div>
+
+    }
+
+}
+
+@code{
+    int numero =0;
+
+
+
+
+}

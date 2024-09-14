@@ -1,0 +1,111 @@
+@page "/Aprende_Mas"
+@rendermode InteractiveServer
+
+
+<PageTitle> Aprende mas</PageTitle>
+
+
+@if (MostrarVideo)
+{
+    <div class="embed-responsive embed-responsive-16by9" style="max-width: 900px;">
+        <iframe class="" style="width: 100%; height: 600px;" src="@UrlVideo" allowfullscreen></iframe>
+    </div>
+    <button class="btn btn-primary"@onclick="()=>MostrarVideo=false">Cerrar Video</button>
+
+    
+}else
+{
+<h1>Aprende mas</h1>
+
+<p> Aqui encontraras mas videos informativos</p>
+
+
+<div class = "row">
+
+@foreach (var video in videos) {
+    <div class="col-md-12 mb-3"> <div class="row"> <div class="col-md-4"> <img @onclick ="()=> VerVideo(video)" 
+    src="@video.Miniatura" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-8"> <h6 class="card-title"><strong>@video.Titulo</strong></h6>
+                <p class="card-text"><strong>Descripción:</strong> @video.Descripcion</p>
+                <p class="card-text"><strong>Opinión:</strong> @video.Opinion</p>
+
+                <a href="https://www.youtube.com/watch?v=@video.Url " target="_blank" class="btn btn-primary">Ir a YouTube</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+}
+</div>
+
+}
+
+
+
+
+@code{
+
+    Boolean MostrarVideo = false;
+    String UrlVideo ="";
+
+class Video {
+public String Titulo {get; set;} ="";
+public String Url {get; set;} ="";
+
+public String Descripcion {get; set;} ="";
+
+public String Opinion {get; set;} ="";
+
+public String Miniatura{ get; set;} = "";
+
+};
+
+
+void VerVideo(Video video){
+   
+MostrarVideo = true;
+UrlVideo = $"https://www.youtube.com/embed/{video.Url}?rel=0";
+StateHasChanged();
+
+}
+
+List <Video> videos = new List<Video>{
+    
+    new Video {Titulo = "¿Qué diablos es Blazor? | ejemplo básico" ,
+    Descripcion = "Este video es una introducción rápida a Blazor,un  nuevo framework de Microsoft para crear aplicaciones de una sola página (SPA) sin necesidad de usar JavaScript.",
+    Opinion ="Lo que mas me gusto de este video, es que explica de manera muy sencilla lo que es Blazor y para que sirve y da eejmplos",
+    Miniatura ="https://i.ytimg.com/vi/ktDj2xD-H9s/maxresdefault.jpg",
+    Url = "ktDj2xD-H9s"},
+   
+     
+    new Video {Titulo = "Blazor en 10 minutos - ¿Qué es Blazor? - Aprende Blazor desde Cero" ,
+    Descripcion = "Este video explica qué es Blazor y cómo se utiliza para desarrollar aplicaciones web interactivas utilizando C# en el front-end. ",
+    Opinion= "Este video me gusta porque profundiza un poco mas en lo que Blazor y como funciona ",
+    Miniatura ="https://i.ytimg.com/vi/VDkiB5F7FH0/hqdefault.jpg",
+    Url = "VDkiB5F7FH0"},
+
+
+    new Video {Titulo = "¿QUÉ ES BLAZOR? ¿EL NUEVO JAVASCRIPT DE MICROSOFT?", 
+    Descripcion = "Este video explica qué es Blazor, una plataforma de Microsoft para la creación de interfaces web del lado del cliente usando C#.", 
+    Opinion  = "Este video me gusta por que resume mucho de los videos anteriores en tiempo muy corto",
+    Miniatura ="https://i.ytimg.com/vi/piNHZAMxVuk/hqdefault.jpg",
+    Url = "piNHZAMxVuk"},
+
+
+    new Video {Titulo = "Blazor WebAssembly vs Blazor Server en 2 minutos", 
+    Descripcion = "Este video explica las diferencias entre Blazor WebAssembly y Blazor Server, dos tecnologías de Microsoft para desarrollar aplicaciones interactivas con C#.",
+    Opinion = "Este video me gusta porque explica de manera sencilla las diferencias entre WebAssembly Y Blazor Server",
+    Miniatura ="https://i.ytimg.com/vi/aKYLx-YOPAg/hqdefault.jpg",
+    Url = "aKYLx-YOPAg"},
+
+
+    new Video {Titulo = "¿Qué es y cómo funciona WebAssembly?", 
+    Descripcion = "Este video proporciona una visión general de WebAssembly, una tecnología que permite ejecutar código en varios lenguajes de programación directamente en el navegador, mejorando el rendimiento y la interoperabilidad.",
+    Opinion = "Este video me gusta porque explica la importancia de WebAssembly en desarrollo web",
+    Miniatura ="https://i.ytimg.com/vi/xWz9mUlaA84/hqdefault.jpg",
+    Url = "xWz9mUlaA84"}
+
+    };
+}
